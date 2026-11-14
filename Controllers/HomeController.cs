@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using TPFINAL.Models;
 
+
 namespace TPFINAL.Controllers;
 
 public class HomeController : Controller
@@ -13,10 +14,21 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+   
+public IActionResult Index()
+{
+    BD bd = new BD();
+
+    bool conectado = bd.ProbarConexion();
+
+    if (conectado == true)
     {
-        return View();
+        ViewBag.Mensaje = "Base de datos conectada";
     }
+
+    return View();
+}
+
 
     public IActionResult Privacy()
     {
