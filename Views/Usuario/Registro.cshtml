@@ -4,8 +4,10 @@
 }
 
 <h1>Registro - Gimnasio Fuerza</h1>
+<p style="color:red">@ViewBag.Error</p>
+<p style="color:green">@ViewBag.Mensaje</p>
 
-<form>
+<form asp-controller="Usuario" asp-action="Registro" method="post">
     <div>
         <label>Nombre:</label>
         <input type="text" name="Nombre" required />
@@ -26,5 +28,5 @@
         <input type="password" name="Contrasena" required />
     </div>
 
-    <button type="button" disabled>Registrarme</button>
+   <button type="submit">Registrarme</button>
 </form>
