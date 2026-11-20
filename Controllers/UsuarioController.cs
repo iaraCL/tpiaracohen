@@ -73,5 +73,10 @@ namespace TPFINAL.Controllers
             ViewBag.Error = "No se pudo registrar el usuario";
             return View();
         }
+              public IActionResult Login()
+        {
+             return View();
+        }
+  
     }
 }
