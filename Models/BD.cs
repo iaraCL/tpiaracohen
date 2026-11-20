@@ -52,7 +52,26 @@ namespace TPFINAL.Models
         int filas = conexion.Execute(sql, usuario);
 
         return filas > 0;  }
-        }  
+
+        
+        } 
+        
+        public Usuario BuscarUsuario(string nombreUsuario)
+        {
+             using (SqlConnection conexion =
+             new SqlConnection(connectionString))
+            {
+                 string sql = @"SELECT *
+                 FROM Usuarios
+                 WHERE NombreUsuario = @NombreUsuario";
+
+                 Usuario usuario = conexion.QueryFirstOrDefault<Usuario>(
+                  sql, new { NombreUsuario = nombreUsuario });
+
+                  return usuario;
+            }
+}
+ 
         }  
          
 
