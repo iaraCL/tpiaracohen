@@ -77,6 +77,43 @@ namespace TPFINAL.Controllers
         {
              return View();
         }
+
+      [HttpPost]
+      public IActionResult Login(string NombreUsuario, string Contrasena)
+        {
+             if (string.IsNullOrWhiteSpace(NombreUsuario) ||
+             string.IsNullOrWhiteSpace(Contrasena))
+               {
+                     ViewBag.Error = "Completa todos los campos";
+                     return View();
+               }
+
+     BD bd = new BD(); 
+
+    Usuario usuario = bd.BuscarUsuario(NombreUsuario);
+
+    if (usuario == null)
+    {
+        ViewBag.Error = "Usuario o contraseña incorrectos";
+        return View();
+    }
+
+    PasswordHasher<Usuario> hasher = new PasswordHasher<Usuario>();
+
+    PasswordVerificationResult resultado = hasher.VerifyHashedPassword(
+        usuario, usuario.Contrasena, Contrasena);
+
+    if (resultado == PasswordVerificationResult.Failed)
+    {
+        ViewBag.Error = "Usuario o contraseña incorrectos";
+        return View();
+    }
+
+    HttpContext.Session.SetInt32("IdUsuario", usuario.Id);
+
+    return RedirectToAction("Index", "Home");
+}
+
   
     }
 }
