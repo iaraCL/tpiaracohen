@@ -76,7 +76,7 @@ namespace TPFINAL.Models
 
 
        
-        public List<Clase> ObtecnerClases()
+        public List<Clase> ObtenerClases()
         {
             using (SqlConnection conexion = new SqlConnection(connectionString))
             {

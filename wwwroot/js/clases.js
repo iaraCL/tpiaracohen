@@ -1,4 +1,3 @@
-
 let cantidad = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -40,10 +39,15 @@ function verMas() {
                 let profesor = document.createElement("p");
                 profesor.textContent = "Profesor: " + clase.profesor;
 
+                let categoria = document.createElement("p");
+                categoria.textContent = "Categoría: " + clase.categoria;
+
+
                 cuerpo.appendChild(imagen);
                 cuerpo.appendChild(titulo);
                 cuerpo.appendChild(descripcion);
                 cuerpo.appendChild(profesor);
+                cuerpo.appendChild(categoria);
 
                 tarjeta.appendChild(cuerpo);
                 contenedor.appendChild(tarjeta);
