@@ -1,4 +1,3 @@
-
 using Microsoft.Data.SqlClient;
 using Dapper;
 
@@ -22,58 +21,88 @@ namespace TPFINAL.Models
         }
     
  
+       
         public bool ExisteUsuario(string nombreUsuario)
         {
-            
-             using (SqlConnection conexion =
-             new SqlConnection(connectionString))
+            using (SqlConnection conexion = new SqlConnection(connectionString))
             {
-             string sql = @"SELECT COUNT(*)
-                       FROM Usuarios
-                       WHERE NombreUsuario = @NombreUsuario";
+                int cantidad = conexion.QueryFirst<int>(
+                    "sp_ExisteUsuario",
+                    new { NombreUsuario = nombreUsuario },
+                    commandType: System.Data.CommandType.StoredProcedure
+                );
 
-            int cantidad = conexion.QueryFirst<int>(
-            sql, new { NombreUsuario = nombreUsuario });
-
-        return cantidad > 0;
-             }
+                return cantidad > 0;
+            }
         }
+
         
+        
+       
         public bool RegistrarUsuario(Usuario usuario)
         {
-          using (SqlConnection conexion =
-          new SqlConnection(connectionString)){
+            using (SqlConnection conexion = new SqlConnection(connectionString))
+            {
+                int filas = conexion.Execute(
+                    "sp_RegistrarUsuario",
+                    new
+                    {
+                        NombreUsuario = usuario.NombreUsuario,
+                        Contrasena = usuario.Contrasena,
+                        Nombre = usuario.Nombre,
+                        Apellido = usuario.Apellido
+                    },
+                    commandType: System.Data.CommandType.StoredProcedure
+                );
+
+                return filas > 0;
+            }
+        }
+
+
         
-        string sql = @"INSERT INTO Usuarios
-                       (NombreUsuario, Contrasena, Nombre, Apellido)
-                       VALUES
-                       (@NombreUsuario, @Contrasena, @Nombre, @Apellido)";
-
-        int filas = conexion.Execute(sql, usuario);
-
-        return filas > 0;  }
-
-        
-        } 
         
         public Usuario BuscarUsuario(string nombreUsuario)
         {
-             using (SqlConnection conexion =
-             new SqlConnection(connectionString))
+            using (SqlConnection conexion = new SqlConnection(connectionString))
             {
-                 string sql = @"SELECT *
-                 FROM Usuarios
-                 WHERE NombreUsuario = @NombreUsuario";
-
-                 Usuario usuario = conexion.QueryFirstOrDefault<Usuario>(
-                  sql, new { NombreUsuario = nombreUsuario });
-
-                  return usuario;
+                return conexion.QueryFirstOrDefault<Usuario>(
+                    "sp_BuscarUsuario",
+                    new { NombreUsuario = nombreUsuario },
+                    commandType: System.Data.CommandType.StoredProcedure
+                );
             }
-}
- 
-        }  
-         
+        }
 
 
+       
+        public List<Clase> ObtecnerClases()
+        {
+            using (SqlConnection conexion = new SqlConnection(connectionString))
+            {
+                
+                return new List<Clase>(conexion.Query<Clase>(
+                    "sp_ObtenerClases",
+                    commandType: System.Data.CommandType.StoredProcedure
+                ));
+
+            }
+        }
+
+
+        
+        public List<Clase> ObtenerMasClases(int cantidad)
+        {
+            using (SqlConnection conexion = new SqlConnection(connectionString))
+            {
+                return new List<Clase>(conexion.Query<Clase>(
+                    "sp_ObtenerMasClases",
+                    new { Cantidad = cantidad },
+                    commandType: System.Data.CommandType.StoredProcedure
+                ));
+            }
+        }
+
+
+    }
 }

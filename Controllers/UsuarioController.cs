@@ -111,7 +111,7 @@ namespace TPFINAL.Controllers
 
     HttpContext.Session.SetInt32("IdUsuario", usuario.Id);
 
-    return RedirectToAction("Index", "Home");
+    return RedirectToAction("Index", "clases");
 }
 
   

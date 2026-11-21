@@ -1,0 +1,32 @@
+@model List<TPFINAL.Models.Clase>
+
+@{
+    ViewData["Title"] = "Clases";
+}
+
+<h1>Clases del Gimnasio Fuerza</h1>
+<div id="contenedorClases" data-cantidad="@Model.Count">
+
+    @foreach (var clase in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+             
+        <img src="@("/imagenes/" + clase.Imagen)" alt="@clase.Nombre" style="width: 250px; height: 150px; object-fit: cover;" />
+
+                <h3>@clase.Nombre</h3>
+                <p>@clase.Descripcion</p>
+                <p>Profesor: @clase.Profesor</p>
+            </div>
+        </div>
+    }
+</div>
+
+<button id="btnVerMas" class="btn btn-primary" onclick="verMas()">
+    Ver más
+</button>
+
+
+@section Scripts {
+    <script src="~/js/clases.js" asp-append-version="true"></script>
+}
