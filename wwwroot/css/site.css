@@ -1,31 +1,466 @@
-html {
-  font-size: 14px;
+:root {
+    --azul: #101c2e;
+    --azul-claro: #1d3047;
+    --turquesa: #13c7c1;
+    --fondo: #edf3f7;
+    --texto: #243447;
+    --gris: #6b7a8c;
 }
 
-@media (min-width: 768px) {
-  html {
+html {
     font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin: 0;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+/* BARRA DE NAVEGACION */
+
+header .navbar {
+    background: var(--azul) !important;
+    border: none !important;
+    padding: 16px 25px;
+    box-shadow: 0 5px 20px rgba(16, 28, 46, 0.15);
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.navbar-brand {
+    color: white !important;
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
+
+.navbar .nav-link {
+    color: #dbe6f0 !important;
+    font-weight: 500;
+    margin: 0 7px;
+    transition: color 0.2s;
+}
+
+.navbar .nav-link:hover {
+    color: var(--turquesa) !important;
+}
+
+.navbar .navbar-toggler {
+    background: white;
+    border-radius: 10px;
+}
+
+/* CONTENIDO PRINCIPAL */
+
+main {
+    padding-top: 25px;
+    padding-bottom: 60px;
+    min-height: 75vh;
+}
+
+h1 {
+    color: var(--azul);
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 28px;
+    letter-spacing: -1px;
+}
+
+h2 {
+    color: var(--azul);
+    font-size: 28px;
+    font-weight: 750;
+    margin-top: 35px;
+    margin-bottom: 22px;
+}
+
+h3 {
+    color: var(--azul);
+    font-size: 23px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+p {
+    line-height: 1.7;
+}
+
+/* TARJETAS DE CLASES Y RESERVAS */
+
+.card {
+    background: white;
+    border: 1px solid #e4eaf0;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 22px rgba(16, 28, 46, 0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(16, 28, 46, 0.12);
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.card-body h3 {
+    margin-top: 15px;
+}
+
+.card-body p {
+    color: var(--gris);
+    margin-bottom: 10px;
+}
+
+.card-body img {
+    display: block;
+    width: 100% !important;
+    max-width: 450px;
+    height: 220px !important;
+    object-fit: cover;
+    border-radius: 13px;
+    margin-bottom: 15px;
+}
+
+/* CATALOGO */
+
+#contenedorClases {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+#contenedorClases .card {
+    margin-bottom: 0 !important;
+    height: 100%;
+}
+
+#contenedorClases .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#contenedorClases .card-body img {
+    max-width: none;
+}
+
+#contenedorClases .card-body .btn {
+    margin-top: auto;
+}
+
+/* BOTONES */
+
+.btn {
+    border-radius: 10px;
+    padding: 11px 22px;
+    font-weight: 650;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background: var(--turquesa);
+    border-color: var(--turquesa);
+    color: var(--azul);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: #0fb0aa;
+    border-color: #0fb0aa;
+    color: var(--azul);
+}
+
+.btn-danger {
+    background: #e85b67;
+    border-color: #e85b67;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #d74655;
+    border-color: #d74655;
+}
+
+.btn-secondary {
+    background: var(--azul-claro);
+    border-color: var(--azul-claro);
+}
+
+.btn-secondary:hover {
+    background: var(--azul);
+    border-color: var(--azul);
+}
+
+#btnVerMas {
+    display: block;
+    margin: 32px auto;
+    padding: 13px 35px;
+}
+
+/* FORMULARIOS LOGIN Y REGISTRO */
+
+form input:not([type="hidden"]),
+form select,
+.form-control {
+    border: 1px solid #d7e0e8;
+    border-radius: 10px;
+    padding: 12px;
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus,
+form input:focus {
+    border-color: var(--turquesa);
+    box-shadow: 0 0 0 3px rgba(19, 199, 193, 0.15);
+    outline: none;
+}
+
+form label {
+    font-weight: 600;
+    color: var(--azul);
+    margin-bottom: 6px;
+}
+
+main form:not(.navbar form) {
+    max-width: 520px;
+}
+
+/* MENSAJES DE RESERVAS */
+
+#mensajeReserva,
+#mensajeCancelacion {
+    font-weight: 600;
+    font-size: 15px;
+    margin: 18px 0;
+}
+
+#mensajeReserva:not(:empty),
+#mensajeCancelacion:not(:empty) {
+    padding: 14px 18px;
+    background: white;
+    border-radius: 10px;
+    border-left: 4px solid var(--turquesa);
+    box-shadow: 0 3px 12px rgba(16, 28, 46, 0.05);
+}
+
+/* IMAGEN DEL DETALLE */
+
+main > img {
+    max-width: 100%;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(16, 28, 46, 0.10);
+    margin-bottom: 25px;
+}
+
+/* PIE DE PAGINA */
+
+
+/* PIE DE PAGINA */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body > .container {
+    flex: 1;
+}
+
+footer,
+.footer {
+    position: static !important;
+    bottom: auto !important;
+    width: 100%;
+    height: auto !important;
+    line-height: normal !important;
+    margin-top: 40px;
+    padding: 25px 0;
+    background: #101c2e;
+    color: #cbd5e1 !important;
+    border: none !important;
+}
+
+footer a {
+    color: #13c7c1;
+}
+
+
+/* ADAPTACION A CELULARES */
+
+@media (max-width: 992px) {
+    #contenedorClases {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    #contenedorClases {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 29px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    header .navbar {
+        padding: 12px 15px;
+    }
+}
+
+/* LOGIN Y REGISTRO */
+
+main form:not(.navbar form) {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(16, 28, 46, 0.08);
+    border: 1px solid #e4eaf0;
+}
+
+main form input:not([type="hidden"]) {
+    width: 100%;
+    margin-bottom: 14px;
+}
+
+main form .btn-primary {
+    margin-top: 10px;
+}
+
+/* MIS RESERVAS */
+
+main .card {
+    border-left: 4px solid #13c7c1;
+}
+
+main .card .btn-danger {
+    margin-top: 12px;
+}
+
+/* PAGINA DE INICIO */
+
+.inicio-gimnasio {
+    background: linear-gradient(120deg, #101c2e, #17374b, #087f86);
+    border-radius: 24px;
+    padding: 85px 65px;
+    min-height: 430px;
+    display: flex;
+    align-items: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.inicio-gimnasio::after {
+    content: "";
+    position: absolute;
+    width: 340px;
+    height: 340px;
+    border: 2px solid rgba(255,255,255,0.10);
+    border-radius: 50%;
+    right: -75px;
+    top: -100px;
+    box-shadow: 0 0 0 65px rgba(255,255,255,0.035);
+}
+
+.inicio-contenido {
+    position: relative;
+    z-index: 1;
+    max-width: 650px;
+}
+
+.inicio-etiqueta {
+    color: #13c7c1;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.inicio-gimnasio h1 {
+    color: white;
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 22px 0;
+}
+
+.inicio-gimnasio h1 span {
+    color: #13c7c1;
+}
+
+.inicio-contenido p {
+    font-size: 18px;
+    color: #d6e4ec;
+    max-width: 530px;
+    margin-bottom: 28px;
+}
+
+.inicio-botones {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.inicio-botones .btn {
+    padding: 13px 26px;
+}
+
+.inicio-beneficios {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin: 35px 0 55px;
+}
+
+.beneficio {
+    background: white;
+    border-radius: 18px;
+    padding: 30px 25px;
+    border: 1px solid #e4eaf0;
+    box-shadow: 0 6px 22px rgba(16,28,46,0.06);
+}
+
+.beneficio h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.beneficio p {
+    color: #6b7a8c;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .inicio-gimnasio {
+        padding: 55px 25px;
+        min-height: 360px;
+    }
+
+    .inicio-gimnasio h1 {
+        font-size: 38px;
+    }
+
+    .inicio-beneficios {
+        grid-template-columns: 1fr;
+    }
+}
+

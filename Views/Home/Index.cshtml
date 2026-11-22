@@ -1,13 +1,73 @@
-﻿    @{
-        ViewData["Title"] = "Home Page";
-    }
+﻿
+@{
+    ViewData["Title"] = "Inicio";
+}
 
-    <div class="text-center">
-        <h1 class="display-4">Gimnasio Fuerza</h1>
-       <p>Bienvenido a nuestro gimnasio. Conocé nuestras clases y reservá tu lugar.</p>
+<section class="inicio-gimnasio">
 
-    
-   
+    <div class="inicio-contenido">
+
+        <span class="inicio-etiqueta">GIMNASIO FUERZA</span>
+
+        <h1>Tu energía.<br />
+            <span>Tu mejor versión.</span>
+        </h1>
+
+        <p>
+            Entrená a tu ritmo, descubrí nuevas clases y
+            reservá tu lugar de forma rápida y sencilla.
+        </p>
+
+        <div class="inicio-botones">
+            @if (Context.Session.GetInt32("IdUsuario") == null)
+            {
+                <a asp-controller="Usuario"
+                   asp-action="Registro"
+                   class="btn btn-primary">
+                    Empezá ahora
+                </a>
+
+                <a asp-controller="Usuario"
+                   asp-action="Login"
+                   class="btn btn-outline-light">
+                    Iniciar sesión
+                </a>
+            }
+            else
+            {
+                <a asp-controller="Clases"
+                   asp-action="Index"
+                   class="btn btn-primary">
+                    Explorar clases
+                </a>
+
+                <a asp-controller="Reservas"
+                   asp-action="Index"
+                   class="btn btn-outline-light">
+                    Mis reservas
+                </a>
+            }
+        </div>
 
     </div>
-    <h2>@ViewBag.Mensaje</h2>
+
+</section>
+
+<section class="inicio-beneficios">
+
+    <div class="beneficio">
+        <h3>Entrená a tu manera</h3>
+        <p>Explorá nuestras clases y encontrá la actividad ideal para vos.</p>
+    </div>
+
+    <div class="beneficio">
+        <h3>Reservas fáciles</h3>
+        <p>Elegí el horario que prefieras y reservá tu lugar online.</p>
+    </div>
+
+    <div class="beneficio">
+        <h3>Organizá tus clases</h3>
+        <p>Consultá tus próximas reservas y administralas desde tu cuenta.</p>
+    </div>
+
+</section>
