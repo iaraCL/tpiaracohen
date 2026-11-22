@@ -24,11 +24,18 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
+                        
                         @if (Context.Session.GetInt32("IdUsuario") != null)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Clases" asp-action="Index">
                                     Clases
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Reservas" asp-action="Index">
+                                    Mis reservas
                                 </a>
                             </li>
                         }

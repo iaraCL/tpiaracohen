@@ -58,6 +58,29 @@ namespace TPFINAL.Controllers
                 return View(clase);
             }
 
+            [HttpPost]
+            public IActionResult Reservar(int idHorarioClase)
+            {
+                int? idUsuario = HttpContext.Session.GetInt32("IdUsuario");
+
+                if (idUsuario == null)
+                {
+                    return Unauthorized();
+                }
+
+                if (idHorarioClase <= 0)
+                {
+                    return BadRequest();
+                }
+
+                BD bd = new BD();
+
+                int resultado = bd.ReservarClase(idUsuario.Value, idHorarioClase);
+
+                return Json(new { resultado = resultado });
+            }
+
+
 
     }
 }

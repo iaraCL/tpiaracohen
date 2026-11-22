@@ -127,5 +127,47 @@ namespace TPFINAL.Models
             }
         }
 
-     }
-}
+ 
+        public int ReservarClase(int idUsuario, int idHorarioClase)
+        {
+            using (SqlConnection conexion = new SqlConnection(connectionString))
+            {
+                return conexion.QueryFirst<int>(
+                    "sp_ReservarClase",
+                    new
+                    {
+                        IdUsuario = idUsuario,
+                        IdHorarioClase = idHorarioClase
+                    },
+                    commandType: System.Data.CommandType.StoredProcedure
+                );
+            }
+ 
+        } 
+
+            public List<Reserva> ObtenerReservasUsuario(int idUsuario)
+            {
+                using (SqlConnection conexion = new SqlConnection(connectionString))
+                {
+                    return new List<Reserva>(conexion.Query<Reserva>(
+                        "sp_ObtenerReservasUsuario",
+                        new { IdUsuario = idUsuario },
+                        commandType: System.Data.CommandType.StoredProcedure
+                    ));
+                }
+            }
+
+
+            public int CancelarReserva(int idReserva, int idUsuario)
+            {
+                using (SqlConnection conexion = new SqlConnection(connectionString))
+                {
+                    return conexion.QueryFirst<int>(
+                        "sp_CancelarReserva",
+                        new
+                        {
+                            IdReserva = idReserva,
+                            IdUsuario = idUsuario
+                        },
+                        commandType: System.Data.CommandType.StoredProcedure
+                    );

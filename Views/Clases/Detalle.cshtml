@@ -18,6 +18,7 @@
 <p><strong>Profesor:</strong> @Model.Profesor</p>
 
 <h2>Horarios disponibles</h2>
+<p id="mensajeReserva"></p>
 
 @foreach (HorarioClase horario in ViewBag.Horarios)
 {
@@ -27,6 +28,20 @@
             <p>Hora: @horario.FechaHora.ToString("HH:mm")</p>
             <p>Duración: @horario.DuracionMinutos minutos</p>
             <p>Lugares disponibles: @horario.LugaresDisponibles</p>
+
+@if (horario.LugaresDisponibles > 0)
+{
+    <button type="button"
+            class="btn btn-primary"
+            onclick="reservarClase(@horario.Id)">
+        Reservar
+    </button>
+}
+else
+{
+    <p>No quedan lugares disponibles</p>
+}
+
         </div>
     </div>
 }
@@ -37,3 +52,8 @@
    class="btn btn-secondary">
     Volver al catálogo
 </a>
+
+@section Scripts {
+    <script src="~/js/reservas.js" asp-append-version="true"></script>
+}
+

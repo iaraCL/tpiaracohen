@@ -1,0 +1,40 @@
+@model List<TPFINAL.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Mis reservas";
+}
+
+<h1>Mis reservas</h1>
+
+@foreach (var reserva in Model)
+{
+    <div class="card mb-3">
+        <div class="card-body">
+            <h3>@reserva.NombreClase</h3>
+
+            <p>Fecha: @reserva.FechaHora.ToString("dd/MM/yyyy")</p>
+            <p>Hora: @reserva.FechaHora.ToString("HH:mm")</p>
+            <p>Profesor: @reserva.Profesor</p>
+            <p>Duración: @reserva.DuracionMinutos minutos</p>
+
+            @if (reserva.Cancelado)
+            {
+                <p>Estado: Cancelada</p>
+            }
+            else if (reserva.FechaHora < DateTime.Now)
+            {
+                <p>Estado: Finalizada</p>
+            }
+            else
+            {
+                <p>Estado: Próxima</p>
+            }
+        </div>
+    </div>
+}
+
+<a asp-controller="Clases"
+   asp-action="Index"
+   class="btn btn-secondary">
+    Volver al catálogo
+</a>
