@@ -1,0 +1,24 @@
+
+@model TPFINAL.Models.Clase
+
+@{
+    ViewData["Title"] = "Detalle de clase";
+}
+
+<h1>@Model.Nombre</h1>
+
+<img src="@("/imagenes/" + Model.Imagen)"
+     alt="@Model.Nombre"
+     style="width: 300px; height: 200px; object-fit: cover;" />
+
+<p><strong>Categoría:</strong> @Model.Categoria</p>
+
+<p><strong>Descripción:</strong> @Model.Descripcion</p>
+
+<p><strong>Profesor:</strong> @Model.Profesor</p>
+
+<a asp-controller="Clases"
+   asp-action="Index"
+   class="btn btn-secondary">
+    Volver al catálogo
+</a>

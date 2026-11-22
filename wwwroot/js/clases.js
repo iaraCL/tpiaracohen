@@ -49,6 +49,14 @@ function verMas() {
                 cuerpo.appendChild(profesor);
                 cuerpo.appendChild(categoria);
 
+                let botonDetalle = document.createElement("a");
+                botonDetalle.href = "/Clases/Detalle/" + clase.id;
+                botonDetalle.className = "btn btn-primary";
+                botonDetalle.textContent = "Ver detalle";
+
+                cuerpo.appendChild(botonDetalle);
+
+
                 tarjeta.appendChild(cuerpo);
                 contenedor.appendChild(tarjeta);
             });

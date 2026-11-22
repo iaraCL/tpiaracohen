@@ -102,7 +102,16 @@ namespace TPFINAL.Models
                 ));
             }
         }
-
-
-    }
+        public Clase ObtenerDetalleClase(int idClase)
+        {
+            using (SqlConnection conexion = new SqlConnection(connectionString))
+            {
+                return conexion.QueryFirstOrDefault<Clase>(
+                    "sp_ObtenerDetalleClase",
+                    new { IdClase = idClase },
+                    commandType: System.Data.CommandType.StoredProcedure
+                );
+            }
+        }
+     }
 }

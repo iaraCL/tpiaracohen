@@ -18,6 +18,14 @@
                 <h3>@clase.Nombre</h3>
                 <p>@clase.Descripcion</p>
                 <p>Profesor: @clase.Profesor</p>
+
+                <a asp-controller="Clases"
+                asp-action="Detalle"
+                asp-route-id="@clase.Id"
+                class="btn btn-primary">
+                    Ver detalle
+                </a>
+
             </div>
         </div>
     }

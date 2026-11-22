@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Mvc;
 using TPFINAL.Models;
 
@@ -38,6 +37,26 @@ namespace TPFINAL.Controllers
 
                 return Json(clases);
             }
+
+            public IActionResult Detalle(int id)
+            {
+                if (HttpContext.Session.GetInt32("IdUsuario") == null)
+                {
+                    return RedirectToAction("Login", "Usuario");
+                }
+
+                BD bd = new BD();
+
+                Clase clase = bd.ObtenerDetalleClase(id);
+
+                if (clase == null)
+                {
+                    return NotFound();
+                }
+
+                return View(clase);
+            }
+
 
     }
 }
