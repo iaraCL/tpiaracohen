@@ -5,6 +5,7 @@
 }
 
 <h1>Mis reservas</h1>
+<p id="mensajeCancelacion"></p>
 
 @foreach (var reserva in Model)
 {
@@ -25,10 +26,18 @@
             {
                 <p>Estado: Finalizada</p>
             }
+           
             else
             {
                 <p>Estado: Próxima</p>
+
+                <button type="button"
+                        class="btn btn-danger"
+                        onclick="cancelarReserva(@reserva.Id)">
+                    Cancelar reserva
+                </button>
             }
+
         </div>
     </div>
 }
@@ -38,3 +47,8 @@
    class="btn btn-secondary">
     Volver al catálogo
 </a>
+
+@section Scripts {
+    <script src="~/js/cancelaciones.js" asp-append-version="true"></script>
+}
+
