@@ -1,5 +1,5 @@
-
 @model TPFINAL.Models.Clase
+@using TPFINAL.Models
 
 @{
     ViewData["Title"] = "Detalle de clase";
@@ -16,6 +16,21 @@
 <p><strong>Descripción:</strong> @Model.Descripcion</p>
 
 <p><strong>Profesor:</strong> @Model.Profesor</p>
+
+<h2>Horarios disponibles</h2>
+
+@foreach (HorarioClase horario in ViewBag.Horarios)
+{
+    <div class="card mb-3">
+        <div class="card-body">
+            <p>Fecha: @horario.FechaHora.ToString("dd/MM/yyyy")</p>
+            <p>Hora: @horario.FechaHora.ToString("HH:mm")</p>
+            <p>Duración: @horario.DuracionMinutos minutos</p>
+            <p>Lugares disponibles: @horario.LugaresDisponibles</p>
+        </div>
+    </div>
+}
+
 
 <a asp-controller="Clases"
    asp-action="Index"

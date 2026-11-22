@@ -102,6 +102,7 @@ namespace TPFINAL.Models
                 ));
             }
         }
+        
         public Clase ObtenerDetalleClase(int idClase)
         {
             using (SqlConnection conexion = new SqlConnection(connectionString))
@@ -113,5 +114,18 @@ namespace TPFINAL.Models
                 );
             }
         }
+
+        public List<HorarioClase> ObtenerHorariosClase(int idClase)
+        {
+            using (SqlConnection conexion = new SqlConnection(connectionString))
+            {
+                return new List<HorarioClase>(conexion.Query<HorarioClase>(
+                    "sp_ObtenerHorariosClase",
+                    new { IdClase = idClase },
+                    commandType: System.Data.CommandType.StoredProcedure
+                ));
+            }
+        }
+
      }
 }

@@ -54,6 +54,7 @@ namespace TPFINAL.Controllers
                     return NotFound();
                 }
 
+                ViewBag.Horarios = bd.ObtenerHorariosClase(id);
                 return View(clase);
             }
 
