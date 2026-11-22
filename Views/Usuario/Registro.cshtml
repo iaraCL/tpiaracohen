@@ -1,4 +1,3 @@
-
 @{
     ViewData["Title"] = "Registro";
 }
@@ -7,26 +6,33 @@
 <p style="color:red">@ViewBag.Error</p>
 <p style="color:green">@ViewBag.Mensaje</p>
 
-<form asp-controller="Usuario" asp-action="Registro" method="post">
+
+<form asp-controller="Usuario" asp-action="Registro" method="post" onsubmit="return validarRegistro()">
+
     <div>
         <label>Nombre:</label>
-        <input type="text" name="Nombre" required />
+        <input type="text" id="Nombre" name="Nombre" required />
     </div>
 
     <div>
         <label>Apellido:</label>
-        <input type="text" name="Apellido" required />
+        <input type="text" id="Apellido" name="Apellido" required />
     </div>
 
     <div>
         <label>Nombre de usuario:</label>
-        <input type="text" name="NombreUsuario" required />
+        <input type="text" id="NombreUsuario" name="NombreUsuario" required />
     </div>
 
     <div>
         <label>Contraseña:</label>
-        <input type="password" name="Contrasena" required />
+        <input type="password" id="Contrasena" name="Contrasena" required />
     </div>
 
    <button type="submit">Registrarme</button>
 </form>
+
+@section Scripts {
+    <script src="~/js/registro.js" asp-append-version="true"></script>
+}
+

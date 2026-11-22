@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
@@ -111,9 +110,16 @@ namespace TPFINAL.Controllers
 
     HttpContext.Session.SetInt32("IdUsuario", usuario.Id);
 
-    return RedirectToAction("Index", "clases");
-}
 
-  
+            return RedirectToAction("Index", "Clases");
+        }
+
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Login", "Usuario");
+        }
     }
 }
