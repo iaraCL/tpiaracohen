@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Inicio";
 }
 
@@ -18,36 +17,13 @@
             reservá tu lugar de forma rápida y sencilla.
         </p>
 
+        
         <div class="inicio-botones">
-            @if (Context.Session.GetInt32("IdUsuario") == null)
-            {
-                <a asp-controller="Usuario"
-                   asp-action="Registro"
-                   class="btn btn-primary">
-                    Empezá ahora
-                </a>
-
-                <a asp-controller="Usuario"
-                   asp-action="Login"
-                   class="btn btn-outline-light">
-                    Iniciar sesión
-                </a>
-            }
-            else
-            {
-                <a asp-controller="Clases"
-                   asp-action="Index"
-                   class="btn btn-primary">
-                    Explorar clases
-                </a>
-
-                <a asp-controller="Reservas"
-                   asp-action="Index"
-                   class="btn btn-outline-light">
-                    Mis reservas
-                </a>
-            }
+            <a asp-controller="Clases" asp-action="Index" class="btn btn-primary">
+                Ver clases
+            </a>
         </div>
+
 
     </div>
 

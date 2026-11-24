@@ -7,10 +7,17 @@ namespace TPFINAL.Controllers
 {
     public class UsuarioController : Controller
     {
+        
         public IActionResult Registro()
         {
+            if (HttpContext.Session.GetInt32("IdUsuario") != null)
+            {
+                return RedirectToAction("Index", "Clases");
+            }
+
             return View();
         }
+
 
         [HttpPost]
         public IActionResult Registro(Usuario usuario)
@@ -58,8 +65,7 @@ namespace TPFINAL.Controllers
 
                 if (registrado)
                 {
-                    ViewBag.Mensaje = "Usuario registrado correctamente";
-                    return View();
+                    return RedirectToAction("Login", "Usuario");
                 }
             }
             catch (SqlException ex) when (
