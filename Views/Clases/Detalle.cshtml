@@ -27,7 +27,15 @@
             <p>Fecha: @horario.FechaHora.ToString("dd/MM/yyyy")</p>
             <p>Hora: @horario.FechaHora.ToString("HH:mm")</p>
             <p>Duración: @horario.DuracionMinutos minutos</p>
-            <p>Lugares disponibles: @horario.LugaresDisponibles</p>
+         
+            <button type="button"
+                    class="btn btn-secondary"
+                    onclick="verLugares(@horario.Id)">
+                Ver lugares disponibles
+            </button>
+
+            <p id="lugares-@horario.Id"></p>
+
 
 @if (horario.LugaresDisponibles > 0)
 {

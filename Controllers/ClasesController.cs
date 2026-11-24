@@ -81,6 +81,30 @@ namespace TPFINAL.Controllers
             }
 
 
+            [HttpGet]
+            public IActionResult VerLugares(int idHorarioClase)
+            {
+                int? idUsuario = HttpContext.Session.GetInt32("IdUsuario");
+
+                if (idUsuario == null)
+                {
+                    return Unauthorized();
+                }
+
+                if (idHorarioClase <= 0)
+                {
+                    return BadRequest();
+                }
+
+                BD bd = new BD();
+
+                int lugares = bd.ObtenerLugaresDisponibles(idHorarioClase);
+
+                return Json(lugares);
+            }
+
+
+
 
     }
 }

@@ -5,41 +5,59 @@
 }
 
 <h1>Mis reservas</h1>
+
 <p id="mensajeCancelacion"></p>
+
+<h2>Próximas reservas</h2>
 
 @foreach (var reserva in Model)
 {
-    <div class="card mb-3">
-        <div class="card-body">
-            <h3>@reserva.NombreClase</h3>
+    if (!reserva.Cancelado && reserva.FechaHora >= DateTime.Now)
+    {
+        <div class="card mb-3" id="reserva-@reserva.Id">
+            <div class="card-body">
+                <h3>@reserva.NombreClase</h3>
 
-            <p>Fecha: @reserva.FechaHora.ToString("dd/MM/yyyy")</p>
-            <p>Hora: @reserva.FechaHora.ToString("HH:mm")</p>
-            <p>Profesor: @reserva.Profesor</p>
-            <p>Duración: @reserva.DuracionMinutos minutos</p>
-
-            @if (reserva.Cancelado)
-            {
-                <p>Estado: Cancelada</p>
-            }
-            else if (reserva.FechaHora < DateTime.Now)
-            {
-                <p>Estado: Finalizada</p>
-            }
-           
-            else
-            {
-                <p>Estado: Próxima</p>
+                <p>Fecha: @reserva.FechaHora.ToString("dd/MM/yyyy")</p>
+                <p>Hora: @reserva.FechaHora.ToString("HH:mm")</p>
+                <p>Profesor: @reserva.Profesor</p>
+                <p>Duración: @reserva.DuracionMinutos minutos</p>
 
                 <button type="button"
                         class="btn btn-danger"
                         onclick="cancelarReserva(@reserva.Id)">
                     Cancelar reserva
                 </button>
-            }
-
+            </div>
         </div>
-    </div>
+    }
+}
+
+<h2>Reservas pasadas y canceladas</h2>
+
+@foreach (var reserva in Model)
+{
+    if (reserva.Cancelado || reserva.FechaHora < DateTime.Now)
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+                <h3>@reserva.NombreClase</h3>
+
+                <p>Fecha: @reserva.FechaHora.ToString("dd/MM/yyyy")</p>
+                <p>Hora: @reserva.FechaHora.ToString("HH:mm")</p>
+                <p>Profesor: @reserva.Profesor</p>
+
+                @if (reserva.Cancelado)
+                {
+                    <p>Estado: Cancelada</p>
+                }
+                else
+                {
+                    <p>Estado: Finalizada</p>
+                }
+            </div>
+        </div>
+    }
 }
 
 <a asp-controller="Clases"
@@ -47,8 +65,3 @@
    class="btn btn-secondary">
     Volver al catálogo
 </a>
-
-@section Scripts {
-    <script src="~/js/cancelaciones.js" asp-append-version="true"></script>
-}
-

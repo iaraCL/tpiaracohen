@@ -1,4 +1,3 @@
-
 @model List<TPFINAL.Models.Clase>
 
 @{
@@ -18,6 +17,8 @@
                 <h3>@clase.Nombre</h3>
                 <p>@clase.Descripcion</p>
                 <p>Profesor: @clase.Profesor</p>
+                <p>Categoría: @clase.Categoria</p>
+
 
                 <a asp-controller="Clases"
                 asp-action="Detalle"

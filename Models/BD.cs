@@ -174,5 +174,24 @@ namespace TPFINAL.Models
                 }
 }
 
+
+            public int ObtenerLugaresDisponibles(int idHorarioClase)
+            {
+                int lugares = 0;
+
+                using (SqlConnection conexion = new SqlConnection(connectionString))
+                {
+                    lugares = conexion.QueryFirst<int>(
+                        "sp_ObtenerLugaresDisponibles",
+                        new { IdHorarioClase = idHorarioClase },
+                       commandType: System.Data.CommandType.StoredProcedure
+
+                    );
+                }
+
+                return lugares;
+            }
+
+
     } 
 }     

@@ -13,8 +13,6 @@
 }
 
 
-
-
 function validarRegistro()
 {
     let nombre = document.getElementById("Nombre").value;
@@ -127,15 +125,12 @@ function reservarClase(idHorarioClase)
     .then(response => response.json())
     .then(datos => {
 
+       
         if (datos.resultado == 0)
         {
-            mensaje.textContent = "Reserva realizada correctamente";
-            mensaje.style.color = "green";
-
-            setTimeout(function () {
-                location.reload();
-            }, 1500);
+            location.href = "/Reservas/Index";
         }
+
         else if (datos.resultado == 1)
         {
             mensaje.textContent = "El horario no está disponible";
@@ -190,15 +185,15 @@ function cancelarReserva(idReserva)
     .then(response => response.json())
     .then(datos => {
 
+       
         if (datos.resultado == 0)
         {
             mensaje.textContent = "Reserva cancelada correctamente";
             mensaje.style.color = "green";
 
-            setTimeout(function () {
-                location.reload();
-            }, 1500);
+            document.getElementById("reserva-" + idReserva).remove();
         }
+
         else if (datos.resultado == 1)
         {
             mensaje.textContent = "No se puede cancelar esta reserva";
@@ -215,5 +210,21 @@ function cancelarReserva(idReserva)
         console.error(error);
         mensaje.textContent = "Error al cancelar la reserva";
         mensaje.style.color = "red";
+    });
+}
+
+
+function verLugares(idHorarioClase)
+{
+    fetch("/Clases/VerLugares?idHorarioClase=" + idHorarioClase)
+    .then(response => response.json())
+    .then(lugares => {
+
+        document.getElementById("lugares-" + idHorarioClase).innerHTML =
+            "Lugares disponibles: " + lugares;
+
+    })
+    .catch(error => {
+        console.error(error);
     });
 }
